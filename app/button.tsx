@@ -79,7 +79,6 @@ function MyButton(props: any) {
       .then((response) => response.json())
       .then((data) => {
         const filename = "data";
-        console.log(data);
         if (props.ev == "ignitia") {
           downloadExcelFile(data["yantraTeams"], "hack");
         } else {

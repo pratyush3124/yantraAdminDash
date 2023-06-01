@@ -5,13 +5,13 @@ import MyButton from "./button";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [data, setData] = useState<string>();
+  const [data, setData] = useState<{[key: string]: string}>();
 
   useEffect(() => {
     fetch(process.env.NEXT_PUBLIC_BACKEND_URL + "reg")
       .then((response) => response.json())
       .then((data) => {
-        console.log(Object.keys(data));
+        console.log(data);
         setData(data);
       });
   }, []);
@@ -20,12 +20,12 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center p-4">
       <div className="flex p-4 flex-col px-4">
         {data &&
-          Object.keys(data).map((elem) => {
+          Object.keys(data).map((elem:string) => {
             if (elem !== "message") {
               return (
-                <h1 key={elem}>
-                  {elem} : {data[elem]}
-                </h1>
+                <p key={elem}>
+                  {elem} : {elem && data[elem]}
+                </p>
               );
             }
           })}
